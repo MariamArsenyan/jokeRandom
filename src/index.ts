@@ -9,8 +9,38 @@ interface ReportJoke {
     date: string;
 }
 
+
 const reportAcudits: ReportJoke[] = []; 
 let currentJoke: Joke | null = null;
+
+const getWeather = async () => {
+    const apiKey = 'f1e33698508736b647aaf4c3badad160';
+    const city = 'Barcelona';
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
+    console.log("responseURL!!", response)
+    const data = await response.json(); 
+    console.log("Weather data:", data);
+    if (response.ok) {
+        const temperatura = data.main.temp;
+        const icono = data.weather[0].icon;
+        const iconUrl = `http://openweathermap.org/img/w/${icono}.png`; 
+        console.log("Icon URL:", iconUrl);
+        displayWeather(temperatura, iconUrl);
+    } else { 
+        console.error('Error getting weather')
+    }
+}
+getWeather()
+const displayWeather = (temperatura: number, iconUrl: string): void => {
+    const weatherContainer = document.querySelector('#weather');
+    if (weatherContainer) {
+    weatherContainer.innerHTML = `
+        <img src="${iconUrl}" alt="Weather icon" class="weather-icon" /> 
+        <span class="temperature">${temperatura}°C</span>
+    `
+     
+    }
+}
 
 const getJoke = async (): Promise<Joke> => {
     const response = await fetch("https://icanhazdadjoke.com/", {

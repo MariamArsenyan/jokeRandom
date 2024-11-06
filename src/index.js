@@ -10,6 +10,34 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const reportAcudits = [];
 let currentJoke = null;
+const getWeather = () => __awaiter(void 0, void 0, void 0, function* () {
+    const apiKey = 'f1e33698508736b647aaf4c3badad160';
+    const city = 'Barcelona';
+    const response = yield fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
+    console.log("responseURL!!", response);
+    const data = yield response.json();
+    console.log("Weather data:", data);
+    if (response.ok) {
+        const temperatura = data.main.temp;
+        const icono = data.weather[0].icon;
+        const iconUrl = `http://openweathermap.org/img/w/${icono}.png`;
+        console.log("Icon URL:", iconUrl);
+        displayWeather(temperatura, iconUrl);
+    }
+    else {
+        console.error('Error getting weather');
+    }
+});
+getWeather();
+const displayWeather = (temperatura, iconUrl) => {
+    const weatherContainer = document.querySelector('#weather');
+    if (weatherContainer) {
+        weatherContainer.innerHTML = `
+        <img src="${iconUrl}" alt="Weather icon" class="weather-icon" /> 
+        <span class="temperature">${temperatura}°C</span>
+    `;
+    }
+};
 const getJoke = () => __awaiter(void 0, void 0, void 0, function* () {
     const response = yield fetch("https://icanhazdadjoke.com/", {
         headers: {
