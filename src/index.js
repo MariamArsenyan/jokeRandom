@@ -14,14 +14,14 @@ const getWeather = () => __awaiter(void 0, void 0, void 0, function* () {
     const apiKey = 'f1e33698508736b647aaf4c3badad160';
     const city = 'Barcelona';
     const response = yield fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
-    console.log("responseURL!!", response);
+    console.log('responseURL!!', response);
     const data = yield response.json();
-    console.log("Weather data:", data);
+    console.log('Weather data:', data);
     if (response.ok) {
         const temperatura = data.main.temp;
         const icono = data.weather[0].icon;
         const iconUrl = `http://openweathermap.org/img/w/${icono}.png`;
-        console.log("Icon URL:", iconUrl);
+        console.log('Icon URL:', iconUrl);
         displayWeather(temperatura, iconUrl);
     }
     else {
@@ -39,10 +39,10 @@ const displayWeather = (temperatura, iconUrl) => {
     }
 };
 const getJoke = () => __awaiter(void 0, void 0, void 0, function* () {
-    const response = yield fetch("https://icanhazdadjoke.com/", {
+    const response = yield fetch('https://icanhazdadjoke.com/', {
         headers: {
-            'Accept': 'application/json'
-        }
+            Accept: 'application/json',
+        },
     });
     if (!response.ok) {
         throw new Error('Error getting joke');
@@ -51,21 +51,44 @@ const getJoke = () => __awaiter(void 0, void 0, void 0, function* () {
     currentJoke = data;
     return data;
 });
-const displayJoke = (joke) => {
+const getChuckJoke = () => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield fetch('https://api.chucknorris.io/jokes/random', {
+        headers: {
+            Accept: 'application/json',
+        },
+    });
+    if (!response.ok) {
+        throw new Error('Error getting Chuck joke');
+    }
+    const data = yield response.json();
+    return { id: data.id, joke: data.value };
+});
+console.log(getChuckJoke());
+const displayJoke = (jokeData) => {
     const jokeContainer = document.getElementById('joke-text');
     if (jokeContainer) {
-        jokeContainer.innerText = joke;
+        console.log('Mostrando el chiste:', jokeData.joke);
+        jokeContainer.innerText = jokeData.joke;
     }
-    console.log('Joke', joke);
+    else {
+        console.error('El elemento joke-text no se encontró en el DOM.');
+    }
 };
 const handleNewJoke = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const joke = yield getJoke();
-        displayJoke(joke.joke);
-        resetScore();
+        let newJoke;
+        const randomJoke = Math.random();
+        if (randomJoke < 0.5) {
+            newJoke = yield getJoke();
+        }
+        else {
+            newJoke = yield getChuckJoke();
+        }
+        currentJoke = newJoke;
+        displayJoke(newJoke);
     }
-    catch (error) {
-        console.error('Error getting new joke', error);
+    catch (err) {
+        console.error('Error getting new joke', err);
     }
 });
 const resetScore = () => {
@@ -77,7 +100,7 @@ const addReport = (score) => {
         const report = {
             joke: currentJoke.joke,
             score,
-            date: new Date().toISOString()
+            date: new Date().toISOString(),
         };
         const existingReportIndex = reportAcudits.findIndex(ReportJoke => ReportJoke.joke === report.joke);
         if (existingReportIndex !== -1) {
@@ -99,6 +122,7 @@ const handleScoreButtonClick = (event) => {
     }
 };
 const initializeApp = () => {
+    getWeather();
     const newJokeButton = document.getElementById('new-joke-button');
     if (newJokeButton) {
         newJokeButton.addEventListener('click', handleNewJoke);
