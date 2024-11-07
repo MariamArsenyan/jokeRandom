@@ -34,6 +34,7 @@ const displayWeather = (temperatura, iconUrl) => {
     if (weatherContainer) {
         weatherContainer.innerHTML = `
         <img src="${iconUrl}" alt="Weather icon" class="weather-icon" /> 
+        <div class="separator"></div>
         <span class="temperature">${temperatura}°C</span>
     `;
     }
@@ -67,11 +68,11 @@ console.log(getChuckJoke());
 const displayJoke = (jokeData) => {
     const jokeContainer = document.getElementById('joke-text');
     if (jokeContainer) {
-        console.log('Mostrando el chiste:', jokeData.joke);
+        console.log('Joke:', jokeData.joke);
         jokeContainer.innerText = jokeData.joke;
     }
     else {
-        console.error('El elemento joke-text no se encontró en el DOM.');
+        console.error('Error getting joke-text');
     }
 };
 const handleNewJoke = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -134,3 +135,4 @@ const initializeApp = () => {
     handleNewJoke();
 };
 document.addEventListener('DOMContentLoaded', initializeApp);
+initializeApp();

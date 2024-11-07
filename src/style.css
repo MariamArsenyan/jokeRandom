@@ -5,14 +5,49 @@
 }
 
 body {
-    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/016/188/535/small_2x/animated-laughing-elements-flat-cartoon-style-hd-footage-funny-joke-sense-of-humor-positive-feeling-color-illustration-on-white-background-with-alpha-channel-transparency-for-animation-video.jpg');
-    height: 100vh;  
-    font-family: 'Courier New', Courier, monospace;
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;     
+    min-height: 100vh;
+    background-color: #f0f4f8;
+    font-family: 'Montserrat';
+    overflow: hidden;  
 }
-
+.blob-shape {
+    width: 100vh;
+    height: 100vh;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3CclipPath id=%22a%22%3E%3Cpath fill=%22currentColor%22 d=%22M778 637.5Q659 775 462.5 840t-276-137.5Q107 500 213 343.5t313.5-203Q734 94 815.5 297T778 637.5Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cg clip-path=%22url(%23a)%22%3E%3Cpath fill=%22%239498E0%22 d=%22M778 637.5Q659 775 462.5 840t-276-137.5Q107 500 213 343.5t313.5-203Q734 94 815.5 297T778 637.5Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: -1;
+    position: absolute;
+}
+.blob-left {
+    background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3CclipPath id=%22a%22%3E%3Cpath fill=%22currentColor%22 d=%22M879 605q-90 105-185.5 150T496 813.5q-102 13.5-229-19T172 631q32-131 108-183.5t104-136q28-83.5 119.5-93t112 86.5q20.5 96 187 145.5T879 605Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cg clip-path=%22url(%23a)%22%3E%3Cpath fill=%22%239498e0%22 d=%22M879 605q-90 105-185.5 150T496 813.5q-102 13.5-229-19T172 631q32-131 108-183.5t104-136q28-83.5 119.5-93t112 86.5q20.5 96 187 145.5T879 605Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 75%;
+    left: 5%;
+    z-index: -1;
+    width: 150px;
+    height: 150px;
+}
+.blob-right {
+    background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3CclipPath id=%22a%22%3E%3Cpath fill=%22currentColor%22 d=%22M856.5 592q-103.5 92-172 178T530 764.5q-86-91.5-209.5-68T164 610q-33-110 60-176.5T343 232q26-135 145-99t215.5 92.5Q800 282 880 391t-23.5 201Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cg clip-path=%22url(%23a)%22%3E%3Cpath fill=%22%239498e0%22 d=%22M856.5 592q-103.5 92-172 178T530 764.5q-86-91.5-209.5-68T164 610q-33-110 60-176.5T343 232q26-135 145-99t215.5 92.5Q800 282 880 391t-23.5 201Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    z-index: -1;
+    width: 150px;
+    height: 150px;
+}
 .container {
     text-align: center;
     background-position: center;
@@ -24,52 +59,77 @@ body {
 h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: #fff;
 }
 .card {
     max-width: 500px;
     margin: auto;
-    background-color: #fff;
     padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 #joke-text {
     font-size: 1.2rem;
-    color: #555;
+    color: #fff;
     line-height: 1.5;
     padding: 1rem;
 }
 
 .button {
-    margin: 2rem;
-    padding: 0.8rem 1.2rem;
+    background-color: transparent;
+    width: 35%;
+    padding: 0.8rem 2rem;
     font-size: 1rem;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
+    border: 2px solid black;
+    border-radius: 20px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    position: relative;
 }
 
-.button:hover {
-    background-color: #0062cc;
+.button::before {
+    content: '';
+    background-color: rgb(255, 214, 0);
+    position: absolute;
+    top: 2px;
+    left: 1px;
+    width: 102%;
+    height: 109%;
+    border-radius: 20px;
+    z-index: -1;
 }
-
+#text {
+    font-size: 1rem;
+}
 #weather {
+    position: absolute;
+    top: 20px;
+    left: 20px;
     display: flex;
     align-items: center;
     padding: 10px;
 }
 
-.temperatura{
-    font-size: 1,5rem;
+.temperatura {
+    font-size: 1, 5rem;
 }
 
 .weather-icon {
     width: 60px;
     height: 60px;
-    margin-right: 20px;
+    margin-right: 10px; 
+}
+.separator {
+    width: 2px;
+    height: 45px;
+    background-color: #333;
+    margin-right: 10px;
+}
+#score-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    border: none;
+}
+.score-btn {
+    font-size: 1.5rem;
+    border-radius: 20px;
 }

@@ -5,19 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Joke</title>
     <link rel="stylesheet" href="./style.css">
+    <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-    <div id="weather" >
-        
+    <div id="weather" class="weather-info"></div>
+        <div class="blob-shape"></div> 
+        <div class="blob-left"></div> 
+        <div class="blob-right"></div>
     </div>
-        <h2>Ready to laugh? 🤪</h2>
+    <div class="container">  
+        <h2>
+            Ready to laugh? 
+            <i class="em em-rolling_on_the_floor_laughing" style="font-size: 1,5rem;"></i>
+        </h2>
         <div id="joke-card" class="card">
             <p id="joke-text">Loading Joke...</p>
             <div id="score-buttons">
-                <button class="score-btn" data="1">😐</button>
-                <button class="score-btn" data="2">😊</button>
-                <button class="score-btn" data="3">😂</button>
+                <button class="score-btn em em-confused " data="1"></button>
+                <button class="score-btn em em-sweat_smile" data="2"></button>
+                <button class="score-btn em em-laughing" data="3"></button>
             </div>
         </div>
         <button id="new-joke-button" class="button">New joke</button>
